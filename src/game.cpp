@@ -70,7 +70,7 @@ void Game::moveBlockRight()
 void Game::moveBlockDown()
 {
     currentBlock.move(1, 0);
-    if (isBlockOutside()) {
+    if (isBlockOutside() or !blockfits()) {
         currentBlock.move(-1, 0);
         lockBlock();
     }
@@ -104,4 +104,15 @@ void Game::rotateBlock()
     if (isBlockOutside()) {
         currentBlock.undoRotation();
     }
+}
+
+bool Game::blockfits()
+{
+    std::vector<Position> tiles = currentBlock.getCellPositions();
+    for (Position item : tiles) {
+        if (grid.isCellEmpty(item.row, item.column) == false) {
+            return false;
+        }
+    }
+    return true;
 }
