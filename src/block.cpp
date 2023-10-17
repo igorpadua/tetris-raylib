@@ -1,21 +1,20 @@
 #include "block.hpp"
 
 Block::Block()
-    : cellSize(30)
-    , rotationState(0)
-    , colors(getCellColors())
-    , rowOffset(0)
-    , columnOffset(0)
 {
-
+    cellSize = 30;
+    rotationState = 0;
+    colors = getCellColors();
+    rowOffset = 0;
+    columnOffset = 0;
 }
 
 void Block::draw()
 {
     std::vector<Position> tiles = getCellPositions();
-
-    for (Position item : tiles) {
-        DrawRectangle(item.column + cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, colors[id]);
+    for (Position item : tiles)
+    {
+        DrawRectangle(item.column * cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, colors[id]);
     }
 }
 
@@ -29,20 +28,18 @@ std::vector<Position> Block::getCellPositions()
 {
     std::vector<Position> tiles = cells[rotationState];
     std::vector<Position> movedTiles;
-
-    for (Position item : tiles) {
+    for (Position item : tiles)
+    {
         Position newPos = Position(item.row + rowOffset, item.column + columnOffset);
         movedTiles.push_back(newPos);
     }
-
     return movedTiles;
 }
 
 void Block::rotate()
 {
     rotationState++;
-
-    if (rotationState == static_cast<int>(cells.size())) {
+    if (rotationState == (int)cells.size()) {
         rotationState = 0;
     }
 }
@@ -50,8 +47,7 @@ void Block::rotate()
 void Block::undoRotation()
 {
     rotationState--;
-
-    if (rotationState == 0) {
-        rotationState = static_cast<int>(cells.size()) - 1;
+    if (rotationState == -1) {
+        rotationState = cells.size() - 1;
     }
 }

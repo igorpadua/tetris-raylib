@@ -10,7 +10,9 @@ int main()
     Game game = Game();
 
     while (!WindowShouldClose()) {
+        game.handleInput();
         BeginDrawing();
+//        game.moveBlockDown();
         ClearBackground(darkBlue);
         game.draw();
         EndDrawing();

@@ -1,12 +1,11 @@
 #include "game.hpp"
 
 Game::Game()
-    : grid(Grid())
-    , blocks(getAllBlocks())
-    , currentBlock(getRandomBlock())
-    , nextBlock(getRandomBlock())
 {
-
+    grid = Grid();
+    blocks = getAllBlocks();
+    currentBlock = getRandomBlock();
+    nextBlock = getRandomBlock();
 }
 
 Block Game::getRandomBlock()
