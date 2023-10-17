@@ -30,7 +30,8 @@ endif()
 add_executable(${PROJECT_NAME} src/main.cpp src/grid.cpp src/grid.hpp
     src/block.hpp src/block.cpp
     src/position.hpp src/position.cpp
-    src/colors.hpp src/colors.cpp)
+    src/colors.hpp src/colors.cpp
+    src/blocks.cpp)
 # set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

@@ -1,5 +1,6 @@
 #include "grid.hpp"
 #include <raylib.h>
+#include "blocks.cpp"
 
 int main()
 {
@@ -10,10 +11,13 @@ int main()
     Grid grid = Grid();
     grid.print();
 
+    LBlock block = LBlock();
+
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(darkBlue);
         grid.draw();
+        block.draw();
         EndDrawing();
     }
 
