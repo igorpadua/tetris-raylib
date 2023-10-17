@@ -10,6 +10,7 @@ public:
     void initialize();
     void print();
     void draw();
+    bool isCellOutside(int row, int column);
     int grid[20][10];
 
 private:
