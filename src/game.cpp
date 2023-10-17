@@ -6,6 +6,7 @@ Game::Game()
     blocks = getAllBlocks();
     currentBlock = getRandomBlock();
     nextBlock = getRandomBlock();
+    gameOver = false;
 }
 
 Block Game::getRandomBlock()
@@ -35,6 +36,12 @@ void Game::draw()
 void Game::handleInput()
 {
     int keyPressed = GetKeyPressed();
+
+    if (gameOver and keyPressed != 0) {
+        gameOver = false;
+        reset();
+    }
+
     switch (keyPressed) {
     case KEY_LEFT:
         moveBlockLeft();
@@ -53,6 +60,9 @@ void Game::handleInput()
 
 void Game::moveBlockLeft()
 {
+    if (gameOver) {
+        return;
+    }
     currentBlock.move(0, -1);
     if (isBlockOutside() or !blockfits()) {
         currentBlock.move(0, 1);
@@ -61,6 +71,9 @@ void Game::moveBlockLeft()
 
 void Game::moveBlockRight()
 {
+    if (gameOver) {
+        return;
+    }
     currentBlock.move(0, 1);
     if (isBlockOutside() or !blockfits()) {
         currentBlock.move(0, -1);
@@ -69,6 +82,9 @@ void Game::moveBlockRight()
 
 void Game::moveBlockDown()
 {
+    if (gameOver) {
+        return;
+    }
     currentBlock.move(1, 0);
     if (isBlockOutside() or !blockfits()) {
         currentBlock.move(-1, 0);
@@ -84,6 +100,9 @@ void Game::lockBlock()
         grid.grid[item.row][item.column] = currentBlock.id;
     }
     currentBlock = nextBlock;
+    if (!blockfits()) {
+        gameOver = true;
+    }
     nextBlock = getRandomBlock();
     grid.clearFullRows();
 }
@@ -101,6 +120,9 @@ bool Game::isBlockOutside()
 
 void Game::rotateBlock()
 {
+    if (gameOver) {
+        return;
+    }
     currentBlock.rotate();
     if (isBlockOutside()) {
         currentBlock.undoRotation();
@@ -116,4 +138,12 @@ bool Game::blockfits()
         }
     }
     return true;
+}
+
+void Game::reset()
+{
+    grid.initialize();
+    blocks = getAllBlocks();
+    currentBlock = getRandomBlock();
+    nextBlock = getRandomBlock();
 }
