@@ -72,7 +72,19 @@ void Game::moveBlockDown()
     currentBlock.move(1, 0);
     if (isBlockOutside()) {
         currentBlock.move(-1, 0);
+        lockBlock();
     }
+}
+
+void Game::lockBlock()
+{
+    std::vector<Position> tiles = currentBlock.getCellPositions();
+
+    for (Position item : tiles) {
+        grid.grid[item.row][item.column] = currentBlock.id;
+    }
+    currentBlock = nextBlock;
+    nextBlock = getRandomBlock();
 }
 
 bool Game::isBlockOutside()

@@ -16,6 +16,7 @@ public:
     void moveBlockLeft();
     void moveBlockRight();
     void moveBlockDown();
+    void lockBlock();
 
 private:
     bool isBlockOutside();
