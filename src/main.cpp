@@ -11,9 +11,10 @@ int main()
     Grid grid = Grid();
     grid.print();
 
-    LBlock block = LBlock();
+    IBlock block = IBlock();
+    block.move(4, 3);
 
-    while (!WindowShouldClose()) {
+    while (WindowShouldClose() == false) {
         BeginDrawing();
         ClearBackground(darkBlue);
         grid.draw();
@@ -22,5 +23,4 @@ int main()
     }
 
     CloseWindow();
-    return 0;
 }
