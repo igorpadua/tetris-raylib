@@ -27,7 +27,10 @@ endif()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} src/main.cpp src/grid.cpp src/grid.hpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/grid.cpp src/grid.hpp
+    src/block.hpp src/block.cpp
+    src/position.hpp src/position.cpp
+    src/colors.hpp src/colors.cpp)
 # set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
