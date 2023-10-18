@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.11) # FetchContent is available in 3.11+
-project(tetris-raylib)
+cmake_minimum_required(VERSION 3.11)
 
-# Generate compile_commands.json
+project(tetris-raylib LANGUAGES CXX)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Dependencies
 set(RAYLIB_VERSION 4.5.0)
 find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
 if(NOT raylib_FOUND) # If there's none, fetch and build raylib
@@ -25,26 +26,19 @@ if(NOT raylib_FOUND) # If there's none, fetch and build raylib
   endif()
 endif()
 
-# Our Project
-
 add_executable(${PROJECT_NAME} src/main.cpp src/grid.cpp src/grid.hpp
     src/block.hpp src/block.cpp
     src/position.hpp src/position.cpp
     src/colors.hpp src/colors.cpp
     src/blocks.cpp
     src/game.hpp src/game.cpp)
-# set(raylib_VERBOSE 1)
+
 target_link_libraries(${PROJECT_NAME} raylib)
 
-# Web Configurations
-if(${PLATFORM} STREQUAL "Web")
-  # Tell Emscripten to build an example.html file.
-  set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
-endif()
+set(RESOURCE_FILES
+    "font/monogram.ttf"
+)
 
-# Checks if OSX and links appropriate frameworks (Only required on MacOS)
-if(APPLE)
-  target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-  target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-  target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
-endif()
+foreach(RESOURCE ${RESOURCE_FILES})
+    configure_file(${CMAKE_SOURCE_DIR}/${RESOURCE} ${CMAKE_BINARY_DIR}/${RESOURCE} COPYONLY)
+endforeach()
