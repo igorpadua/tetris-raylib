@@ -8,19 +8,19 @@ class Game
 {
 public:
     Game();
-    Grid grid;
-    Block getRandomBlock();
-    std::vector<Block> getAllBlocks();
     void draw();
     void handleInput();
-    void moveBlockLeft();
-    void moveBlockRight();
     void moveBlockDown();
     void lockBlock();
     bool gameOver;
     int score;
 
 private:
+    Grid grid;
+    void moveBlockLeft();
+    void moveBlockRight();
+    Block getRandomBlock();
+    std::vector<Block> getAllBlocks();
     bool isBlockOutside();
     void rotateBlock();
     bool blockfits();
