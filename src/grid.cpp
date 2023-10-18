@@ -1,5 +1,6 @@
 #include "grid.hpp"
 #include <iostream>
+#include "colors.hpp"
 
 Grid::Grid()
     : numRows(20)
@@ -19,7 +20,7 @@ void Grid::initialize()
     }
 }
 
-void Grid::print()
+void Grid::print() const
 {
     for (int row = 0; row < numRows; row++) {
         for (int column = 0; column < numCols; column++) {
@@ -29,7 +30,7 @@ void Grid::print()
     }
 }
 
-void Grid::draw()
+void Grid::draw() const
 {
     for (int row = 0; row < numRows; ++row) {
         for (int column = 0; column < numCols; ++column) {
@@ -39,7 +40,7 @@ void Grid::draw()
     }
 }
 
-bool Grid::isCellOutside(int row, int column)
+bool Grid::isCellOutside(int row, int column) const
 {
     if (row >= 0 && row < numRows && column >= 0 && column < numCols) {
         return false;
@@ -47,7 +48,7 @@ bool Grid::isCellOutside(int row, int column)
     return true;
 }
 
-bool Grid::isCellEmpty(int row, int column)
+bool Grid::isCellEmpty(int row, int column) const
 {
     if (grid[row][column] == 0) {
         return true;
@@ -57,7 +58,7 @@ bool Grid::isCellEmpty(int row, int column)
 
 int Grid::clearFullRows()
 {
-    int completed = 0;
+    auto completed = 0;
 
     for (int row = numRows - 1; row >= 0; --row) {
         if (isRowFull(row)) {
@@ -71,7 +72,7 @@ int Grid::clearFullRows()
     return completed;
 }
 
-bool Grid::isRowFull(int row)
+bool Grid::isRowFull(int row) const
 {
     for (int column = 0; column < numCols; ++column) {
         if (grid[row][column] == 0) {
