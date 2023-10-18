@@ -1,14 +1,14 @@
 #include "game.hpp"
+#include <cstdlib>
 
 Game::Game()
+    : grid(Grid())
+    , blocks(getAllBlocks())
+    , currentBlock(getRandomBlock())
+    , nextBlock(getRandomBlock())
+    , gameOver(false)
+    , score(0)
 {
-    grid = Grid();
-    blocks = getAllBlocks();
-    currentBlock = getRandomBlock();
-    nextBlock = getRandomBlock();
-    gameOver = false;
-    score = 0;
-
     InitAudioDevice();
     music = LoadMusicStream("sounds/music.mp3");
     PlayMusicStream(music);
@@ -31,13 +31,13 @@ Block Game::getRandomBlock()
         blocks = getAllBlocks();
     }
 
-    int randomIndex = rand() % blocks.size();
-    Block block = blocks[randomIndex];
+    auto randomIndex = rand() % blocks.size();
+    auto block = blocks[randomIndex];
     blocks.erase(blocks.begin() + randomIndex);
     return block;
 }
 
-std::vector<Block> Game::getAllBlocks()
+std::vector<Block> Game::getAllBlocks() const
 {
     return {IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()};
 }
@@ -61,7 +61,7 @@ void Game::draw()
 
 void Game::handleInput()
 {
-    int keyPressed = GetKeyPressed();
+    auto keyPressed = GetKeyPressed();
 
     if (gameOver and keyPressed != 0) {
         gameOver = false;
@@ -121,7 +121,7 @@ void Game::moveBlockDown()
 
 void Game::lockBlock()
 {
-    std::vector<Position> tiles = currentBlock.getCellPositions();
+    auto tiles = currentBlock.getCellPositions();
 
     for (Position item : tiles) {
         grid.grid[item.row][item.column] = currentBlock.id;
@@ -140,7 +140,7 @@ void Game::lockBlock()
 
 bool Game::isBlockOutside()
 {
-    std::vector<Position> tiles = currentBlock.getCellPositions();
+    auto tiles = currentBlock.getCellPositions();
     for (Position item : tiles) {
         if (grid.isCellOutside(item.row, item.column)) {
             return true;
@@ -199,4 +199,19 @@ void Game::updateScore(int linesCleared, int moveDownPoints)
     }
 
     score += moveDownPoints;
+}
+
+bool Game::getGameOver() const
+{
+    return gameOver;
+}
+
+int Game::getScore() const
+{
+    return score;
+}
+
+Music Game::getMusic() const
+{
+    return music;
 }

@@ -2,7 +2,6 @@
 #include "block.hpp"
 #include "blocks.cpp"
 #include "grid.hpp"
-#include <random>
 
 class Game
 {
@@ -13,16 +12,17 @@ public:
     void handleInput();
     void moveBlockDown();
     void lockBlock();
-    bool gameOver;
-    int score;
-    Music music;
+
+    bool getGameOver() const;
+    int getScore() const;
+    Music getMusic() const;
 
 private:
     Grid grid;
     void moveBlockLeft();
     void moveBlockRight();
     Block getRandomBlock();
-    std::vector<Block> getAllBlocks();
+    std::vector<Block> getAllBlocks() const;
     bool isBlockOutside();
     void rotateBlock();
     bool blockfits();
@@ -33,5 +33,8 @@ private:
     Block nextBlock;
     Sound rotateSound;
     Sound clearSound;
+    bool gameOver;
+    int score;
+    Music music;
 };
 
