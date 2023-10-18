@@ -8,6 +8,16 @@ Game::Game()
     nextBlock = getRandomBlock();
     gameOver = false;
     score = 0;
+
+    InitAudioDevice();
+    music = LoadMusicStream("sounds/music.mp3");
+    PlayMusicStream(music);
+}
+
+Game::~Game()
+{
+    UnloadMusicStream(music);
+    CloseAudioDevice();
 }
 
 Block Game::getRandomBlock()

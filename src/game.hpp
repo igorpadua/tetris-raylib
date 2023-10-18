@@ -8,12 +8,14 @@ class Game
 {
 public:
     Game();
+    ~Game();
     void draw();
     void handleInput();
     void moveBlockDown();
     void lockBlock();
     bool gameOver;
     int score;
+    Music music;
 
 private:
     Grid grid;
@@ -29,5 +31,7 @@ private:
     std::vector<Block> blocks;
     Block currentBlock;
     Block nextBlock;
+    Sound rotateSound;
+    Sound clearSound;
 };
 
