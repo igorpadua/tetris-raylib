@@ -39,7 +39,6 @@ set(RESOURCE_FILES
     "font/monogram.ttf"
     "sounds/clear.mp3"
     "sounds/music.mp3"
-
     "sounds/rotate.mp3"
 )
 
