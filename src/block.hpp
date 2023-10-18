@@ -2,15 +2,14 @@
 
 #include <vector>
 #include <map>
+#include <raylib.h>
 
 #include "position.hpp"
-#include "colors.hpp"
 
 class Block
 {
 public:
     Block();
-    int id;
     std::map<int, std::vector<Position>> cells;
     void draw(int offsetX, int offsetY);
     void move(int rows, int  columns);
@@ -18,7 +17,11 @@ public:
     void rotate();
     void undoRotation();
 
+    void setId(int newId);
+    int getId() const;
+
 private:
+    int id;
     int cellSize;
     int rotationState;
     std::vector<Color> colors;

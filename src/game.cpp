@@ -47,7 +47,7 @@ void Game::draw()
     grid.draw();
     currentBlock.draw(11, 11);
 
-    switch (nextBlock.id) {
+    switch (nextBlock.getId()) {
     case 3:
         nextBlock.draw(255, 290);
         break;
@@ -124,7 +124,7 @@ void Game::lockBlock()
     auto tiles = currentBlock.getCellPositions();
 
     for (Position item : tiles) {
-        grid.grid[item.row][item.column] = currentBlock.id;
+        grid.grid[item.row][item.column] = currentBlock.getId();
     }
     currentBlock = nextBlock;
     if (!blockfits()) {
