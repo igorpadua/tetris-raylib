@@ -5,3 +5,13 @@ Position::Position(int row, int column)
     , column(column)
 {
 }
+
+int Position::getRow() const
+{
+    return row;
+}
+
+int Position::getColumn() const
+{
+    return column;
+}

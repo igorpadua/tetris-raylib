@@ -124,7 +124,7 @@ void Game::lockBlock()
     auto tiles = currentBlock.getCellPositions();
 
     for (Position item : tiles) {
-        grid.grid[item.row][item.column] = currentBlock.getId();
+        grid.grid[item.getRow()][item.getColumn()] = currentBlock.getId();
     }
     currentBlock = nextBlock;
     if (!blockfits()) {
@@ -142,7 +142,7 @@ bool Game::isBlockOutside()
 {
     auto tiles = currentBlock.getCellPositions();
     for (Position item : tiles) {
-        if (grid.isCellOutside(item.row, item.column)) {
+        if (grid.isCellOutside(item.getRow(), item.getColumn())) {
             return true;
         }
     }
@@ -166,7 +166,7 @@ bool Game::blockfits()
 {
     std::vector<Position> tiles = currentBlock.getCellPositions();
     for (Position item : tiles) {
-        if (!grid.isCellEmpty(item.row, item.column)) {
+        if (!grid.isCellEmpty(item.getRow(), item.getColumn())) {
             return false;
         }
     }

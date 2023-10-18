@@ -15,7 +15,7 @@ void Block::draw(int offsetX, int offsetY)
     auto tiles = getCellPositions();
     for (Position item : tiles)
     {
-        DrawRectangle(item.column * cellSize + offsetX, item.row * cellSize + offsetY, cellSize - 1, cellSize - 1, colors[id]);
+        DrawRectangle(item.getColumn() * cellSize + offsetX, item.getRow() * cellSize + offsetY, cellSize - 1, cellSize - 1, colors[id]);
     }
 }
 
@@ -31,7 +31,7 @@ std::vector<Position> Block::getCellPositions()
     auto movedTiles = std::vector<Position>();
     for (Position item : tiles)
     {
-        Position newPos = Position(item.row + rowOffset, item.column + columnOffset);
+        Position newPos = Position(item.getRow() + rowOffset, item.getColumn() + columnOffset);
         movedTiles.push_back(newPos);
     }
     return movedTiles;
