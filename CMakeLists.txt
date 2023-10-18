@@ -37,6 +37,9 @@ target_link_libraries(${PROJECT_NAME} raylib)
 
 set(RESOURCE_FILES
     "font/monogram.ttf"
+    "sounds/clear.mp3"
+    "sounds/music.mp3"
+    "sounds/rotate.mp3"
 )
 
 foreach(RESOURCE ${RESOURCE_FILES})
